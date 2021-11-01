@@ -35,11 +35,11 @@ $sql = array(
      "INSERT INTO banderin (titulo, img, contenido)
      VALUES ('LAAAAAAAAAARGO', '', 'Aunque este string sea largo la animacion no se debe cortar ya que sino algo no anda bien, asegurence que funcione')",
      "INSERT INTO empleados (nombre, apellido, region, telefono)
-     VALUES ('Martin','Gomez','arg/rn/bariloche',542944143724)",
+     VALUES ('Martin','Gomez','arg/rn/bariloche','542944143724')",
      "INSERT INTO empleados (nombre, apellido, region, telefono)
-     VALUES ('Nadia','Dolores','arg/ch/elhoyo',542944348912)",
+     VALUES ('Nadia','Dolores','arg/ch/elhoyo','542944348912')",
      "INSERT INTO empleados (nombre, apellido, region, telefono)
-     VALUES ('Ema','Carmela','arg/ch/el hoyo',542944919884)"
+     VALUES ('Ema','Carmela','arg/ch/el hoyo','542944919884')"
      
 );
 $num = count($sql);

@@ -59,7 +59,16 @@ $sql = array(
         apellido VARCHAR(100),
         region VARCHAR(100),
         telefono VARCHAR(50),
-        activo BOOLEAN DEFAULT 1
+        activo BOOLEAN DEFAULT 1,
+        )",
+    "CREATE TABLE curriculums (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(50) NOT NULL,
+        apellido VARCHAR(100),
+        region VARCHAR(100),
+        telefono VARCHAR(50),
+        aceptado BOOLEAN DEFAULT 0,
+        curriculum VARCHAR (250)
         )",
 );
 $num = count($sql);
