@@ -14,6 +14,19 @@ $responses->accion =array("Database created successfully ","Table turnos created
 $responses->error =array("Error creating database: ", "Error creating table turnos: ", "Error creating table noticias: ", "Error creating table carrusel: ", "Error creating table ofertas: ", "Error creating table banderin: ","Error creating table personal ");
 $sql = array(
     "CREATE DATABASE chupink",
+    "CREATE TABLE personal (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(50) NOT NULL,
+        apellido VARCHAR(100),
+        region VARCHAR(100),
+        telefono VARCHAR(50),
+        mail VARCHAR(40),
+        servicios VARCHAR(100),
+        activo BOOLEAN DEFAULT 1,
+        added_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        added_by VARCHAR(20) NOT NULL,
+        enabled BOOLEAN DEFAULT 1
+        ) ENGINE = InnoDB",
     "CREATE TABLE turnos (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         nombre VARCHAR(30) NOT NULL,
@@ -73,19 +86,6 @@ $sql = array(
         added_by VARCHAR(20) NOT NULL,
         enabled BOOLEAN DEFAULT 1
         ) ENGINE = InnoDB",
-    "CREATE TABLE personal (
-        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        nombre VARCHAR(50) NOT NULL,
-        apellido VARCHAR(100),
-        region VARCHAR(100),
-        telefono VARCHAR(50),
-        mail VARCHAR(40),
-        servivcios VARCHAR(100),
-        activo BOOLEAN DEFAULT 1,
-        added_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        added_by VARCHAR(20) NOT NULL,
-        enabled BOOLEAN DEFAULT 1
-        ) ENGINE = InnoDB",
     "CREATE TABLE curriculums (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         nombre VARCHAR(50) NOT NULL,
@@ -94,10 +94,6 @@ $sql = array(
         telefono VARCHAR(50),
         mail VARCHAR(40),
         aceptado BOOLEAN DEFAULT 0,
-<<<<<<< Updated upstream
-        curriculum VARCHAR (250)
-        )",
-=======
         curriculum VARCHAR (250),
         added_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         added_by VARCHAR(20) NOT NULL,
@@ -146,7 +142,6 @@ $sql = array(
     ON UPDATE RESTRICT        
         ) ENGINE = InnoDB"
 
->>>>>>> Stashed changes
 );
 $num = count($sql);
 $i=0;
