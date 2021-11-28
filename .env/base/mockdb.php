@@ -94,10 +94,6 @@ $sql = array(
         telefono VARCHAR(50),
         mail VARCHAR(40),
         aceptado BOOLEAN DEFAULT 0,
-<<<<<<< Updated upstream
-        curriculum VARCHAR (250)
-        )",
-=======
         curriculum VARCHAR (250),
         added_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         added_by VARCHAR(20) NOT NULL,
@@ -146,7 +142,6 @@ $sql = array(
     ON UPDATE RESTRICT        
         ) ENGINE = InnoDB"
 
->>>>>>> Stashed changes
 );
 $num = count($sql);
 $i=0;
