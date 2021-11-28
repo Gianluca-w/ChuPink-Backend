@@ -10,36 +10,69 @@ if ($conn->connect_error) {
 }
 $responses = new stdClass();
 $sql = array(
-    "INSERT INTO noticias (titulo, contenido, img, tags)
-     VALUES ('ABRIMOS ChuPink', 'Finalmente despues de años de preparacion ChuPink sale al mercado', 'img/placeholder1.jpg','SUCURSAL/IMPORTANTE')",
-     "INSERT INTO noticias (titulo, contenido, img, tags)
-     VALUES ('Nueva sucursal ChuPink', 'Hemos abierto una nueva sucursal de ChuPink en Santa Cruz', 'img/placeholder2.jpg','SUCURSAL/IMPORTANTE')",
-     "INSERT INTO noticias (titulo, contenido, img, tags)
-     VALUES ('Ahora Cortamos el pelo!', 'Luego de mucho trabajo, podes pedir un corte de pelo!',null,'SERVICIOS')",
-     "INSERT INTO carrusel (titulo, contenido, img)
-     VALUES ('Uñas acrilicas a medida', 'Bonitas y relucientes', 'img/placeholder1.jpg')",
-     "INSERT INTO carrusel (titulo, contenido, img)
-     VALUES ('Manicura avanzada', 'El cuidado de las manos es importante', 'img/placeholder2.jpg')",
-     "INSERT INTO carrusel (titulo, contenido, img)
-     VALUES ('Pedicura', 'Nuestros expertos te daran los cuidados necesarios', 'img/placeholder3.jpg')",
-     "INSERT INTO ofertas (titulo, contenido, region, tags , fin_oferta , servicios)
-     VALUES ('50% OFF EN MANICURA', 'Descuento del 50% en trabajos de manicura', 'arg/rn/bariloche','UÑAS','','MANICURA')",
-     "INSERT INTO ofertas (titulo, contenido, region, tags , fin_oferta , servicios)
-     VALUES ('50% OFF EN PEDICURA', 'Descuento del 50% en trabajos de pedicura', 'arg/ch/epuyen','UÑAS','','PEDICURA')",
-     "INSERT INTO ofertas (titulo, contenido, region, tags , fin_oferta , servicios)
-     VALUES ('2x1 EN ACRILICOS', 'Trae una amiga a hacerce los acrilicos y solo paga los tuyos', 'arg/rn/viedma','UÑAS','','ACRILICOS')",
-     "INSERT INTO banderin (titulo, img, contenido)
-     VALUES ('MIRA NUESTRAS OFERTAS', '', 'Mira nuestro apartado de ofertas!')",
-     "INSERT INTO banderin (titulo, img, contenido)
-     VALUES ('Flamenco va a ser el logo', 'img/logo.png', 'El logo es un flamenco rosa')",
-     "INSERT INTO banderin (titulo, img, contenido)
-     VALUES ('LAAAAAAAAAARGO', '', 'Aunque este string sea largo la animacion no se debe cortar ya que sino algo no anda bien, asegurence que funcione')",
-     "INSERT INTO empleados (nombre, apellido, region, telefono)
-     VALUES ('Martin','Gomez','arg/rn/bariloche','542944143724')",
-     "INSERT INTO empleados (nombre, apellido, region, telefono)
-     VALUES ('Nadia','Dolores','arg/ch/elhoyo','542944348912')",
-     "INSERT INTO empleados (nombre, apellido, region, telefono)
-     VALUES ('Ema','Carmela','arg/ch/el hoyo','542944919884')"
+    "INSERT INTO rol (nombre, permisos)
+    VALUES ('admin','r/e/l')",
+    "INSERT INTO rol (nombre, permisos)
+    VALUES ('checker','r/l')",
+    "INSERT INTO rol (nombre, permisos)
+    VALUES ('user','r')",
+
+    "INSERT INTO personal (nombre, apellido, region, telefono, mail, activo, servicios, added_by)
+    VALUES ('Emiliano','Erebes','arg/rn/bariloche','2944143724','llameya@gmail.com','1','manicura/pedicura/esmaltados','admin')",
+    "INSERT INTO personal (nombre, apellido, region, telefono, mail, activo, servicios, added_by)
+    VALUES ('Juan','Cerbantes','arg/ch/elhoyo','2944143724','nollame@gmail.com','1','manicura/pedicura','admin')",
+    "INSERT INTO personal (nombre, apellido, region, telefono, mail, activo, servicios, added_by)
+    VALUES ('Esteman','Quito','arg/rn/gralroca','2944143724','soyporteño@gmail.com','1','pedicura','admin')",
+    "INSERT INTO personal (nombre, apellido, region, telefono, mail, activo, servicios, added_by)
+    VALUES ('José','Villareal','arg/rn/viedma','2944143724','españa@gmail.com','1','manicura','admin')",
+    "INSERT INTO personal (nombre, apellido, region, telefono, mail, activo, servicios, added_by)
+    VALUES ('Carlos','García','arg/ch/epuyen','2944143724','CarlosMayer@gmail.com','1','manicura/pedicura/peluqueria/esmaltado','admin')",
+
+    // "INSERT INTO archivos (nombre, ruta, tipo, peso, added_by)
+    // VALUES ('placeholder1','../assets/img/jpg/placeholder1.jpg','jpg','1Kb','admin')",
+    // "INSERT INTO archivos (nombre, ruta, tipo, peso, added_by)
+    // VALUES ('placeholder2','../assets/img/png/placeholder2.png','png','1Kb','admin')",
+    // "INSERT INTO archivos (nombre, ruta, tipo, peso, added_by)
+    // VALUES ('placeholder3','../assets/img/gif/placeholder3.gif','gif','1Kb','admin')",
+
+    "INSERT INTO turnos (nombre, apellido, telefono, hora_turno, confirmado, codigo_confirm, empleado_asignado, added_by)
+     VALUES ('Manuel','Belgrano','542944543286',2021-11-21,'1','33','1','admin')",
+    "INSERT INTO turnos (nombre, apellido, telefono, hora_turno, confirmado, codigo_confirm, empleado_asignado, added_by)
+     VALUES ('Manuela','Belgrano','542944543286',2021-12-11,'1','13','1','admin')",
+    "INSERT INTO turnos (nombre, apellido, telefono, hora_turno, confirmado, codigo_confirm, empleado_asignado, added_by)
+     VALUES ('Juana','DelArco','542945543216',2021-11-29,'1','13','2','admin')",
+     
+
+    "INSERT INTO noticias (titulo, contenido, img, tags, added_by)
+    VALUES ('Nueva Sucursal De Chupink','La nueva sucursal de chupink abre sus puertas en el hoyo Epuyen para que todos puedan disfrutarlo',null,'SUCURSAL','admin')",
+    "INSERT INTO noticias (titulo, contenido, img, tags, added_by)
+    VALUES ('Nuevo Logo De Chupink','Finalmente tenemos un logo decente para mostrar','../assets/img/png/placeholder2.png','NOVEDAD','admin')",
+    "INSERT INTO noticias (titulo, contenido, img, tags, added_by)
+    VALUES ('Nuevo Empleado Contratado','Hemos contratado un nuevo empleado para ayudar en el comercio','../assets/img/jpg/placeholder1.jpg','NOVEDAD','admin')",
+
+    // "INSERT INTO carrusel (titulo, contenido, img, tags, added_by)
+    // VALUES ('')",
+
+    "INSERT INTO ofertas (titulo, contenido, region, tags, fin_oferta, servicios, added_by)
+    VALUES ('2X1 EN ELECTRO','Con la compra de un esmaltado de uñas te puedes llevar un 2 x 1 en electrodomesticos','global','LIMITADA',2021-11-29,'ESMALTADO','admin')",
+    "INSERT INTO ofertas (titulo, contenido, region, tags, fin_oferta, servicios, added_by)
+    VALUES ('Sorteo viaje las vegas','Con un permanente de uñas puedes ganarte un viaje a las vegas a pagar!','arg/rn/bariloche','LIMITADA/SORTEO',2021-11-29,'PERMANENTE','admin')",
+    "INSERT INTO ofertas (titulo, contenido, region, tags, fin_oferta, servicios, added_by)
+    VALUES ('Trae a tus amigas','Por el dia del amige si traes alguien  se hacen uñas correlativas les hacemos un descuento del 80%!','arg/ch/epuyen','LIMITADA',2021-11-29,'UÑAS','admin')",
+
+    // "INSERT INTO banderin (titulo, img, contenido, tags, fin_oferta, servicios, added_by)
+    // VALUES ('')",
+
+    "INSERT INTO curriculums (nombre, apellido, region, telefono, mail, added_by)
+    VALUES ('Manuel','Benjamin','arg/ch/epuyen','2945658856','martindejas2000@hotmail.com','admin')",
+
+    "INSERT INTO usuario (usuario, contrasenia, added_by, id_permisos)
+    VALUES ('admin','admin','admin','1')"
+
+    // "INSERT INTO multimedia (added_by, archivo)
+    // VALUES ('admin')",
+
+     
      
 );
 $num = count($sql);
