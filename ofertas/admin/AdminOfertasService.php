@@ -5,36 +5,45 @@ include "../../.env/base/DBEnviroment.php";
  // header('Content-Type: application/json'); use this to send shit
   //Functions definitions, i can recive and send objects.
 function subirOferta($params, $conexion){
+		$response = new stdClass();
 		$usuario = $conexion->usuariotests;
     	$password = $conexion->passwordtests;
     	$servername = $conexion->servernametests;
     	$db = $conexion->db;
-    	$titulo = $params->title;
-    	$contenido = $params->content;
+		if(isset($params->titulo,$params->contenido,$params->region,$params->servicios,$params->user)){
+			$titulo = $params->titulo;
+    	$contenido = $params->contenido;
     	$region = $params->region;
     	$tags = $params->tags;
     	$fin_oferta = $params->fin_oferta; //*Hacer si esto no esta definido que mande dia de hoy +7 dias a las 8AM
     	$servicios = $params->servicios;
     	$activa = $params->activa;
-    	$sql = "INSERT INTO `ofertas`(`titulo`, `contenido`, `region`, `tags`, `fin_oferta`, `servicios`, `activa`) 
-        VALUES ('$titulo','$contenido','$region','$tags','$fin_oferta','$servicios','$activa',)";
-
+		$user = $params->user;
+    	$sql = "INSERT INTO ofertas(titulo, contenido, region, tags, fin_oferta, servicios, activa, added_by) 
+        VALUES ('$titulo','$contenido','$region','$tags','$fin_oferta','$servicios','$activa','$user')";
     	$conn = new mysqli($servername, $usuario, $password,$db);
-    	$response = new stdClass();
-
       	if ($conn->connect_error) {
         	die("Connection failed: " . $conn->connect_error);
       	}
       	if ($conn->query($sql) === TRUE) {
-        	$response->result['subir'] = 'OK';
-        	$response->msg['subir'] = 'Oferta Agregada Correctamente';
-        	$response->code['subir'] = '200';
+        	$response->result['POST'] = 'OK';
+        	$response->msg['POST'] = 'Oferta Agregada Correctamente';
+        	$response->code['POST'] = '200';
       	} else {
-          	$response->result['subir'] = 'ERROR';
-          	$response->err['subir'] = 'Error al subir los datos';
-          	$response->code['subir'] = $conn->errno;
+          	$response->result['POST'] = 'ERROR';
+          	$response->err['POST'] = 'Error al subir la oferta: '.$conn->error;
+          	$response->code['POST'] = $conn->errno;
         }
-       return $response;
+		$response = json_encode($response);
+		return $response;
+		}else{
+			$response->result['POST'] = 'ERROR';
+          	$response->err['POST'] = 'Error al subir la oferta: Faltan campos obligatorios';
+          	$response->code['POST'] = 1026;
+			$response = json_encode($response);
+			return $response;
+		}
+    	
 }
 
 function borrarOferta($params, $conexion){
@@ -157,8 +166,9 @@ function TodasOfertas($conexion){
 switch($_SERVER['REQUEST_METHOD'])
 {
 case 'GET': $endpoint = TodasOfertas($conexiondata); echo $endpoint; break;
-case 'POST': echo "Post funcionando"; break;
+case 'POST': $endpoint = subirOferta($params, $conexiondata); echo $endpoint;  break;
 case 'PUT': echo "Put funcionando"; break;
+case 'DELETE': echo "Put funcionando"; break;
 default: echo "Error 403 Forbidden";
 }
 // ------------------ Fin pedir todas las ofertas (Lado administrador)-----------------
