@@ -11,7 +11,7 @@ function subirOferta($params, $conexion){
     	$servername = $conexion->servernametests;
     	$db = $conexion->db;
 		if(isset($params->titulo,$params->contenido,$params->region,$params->servicios,$params->user)){
-			$titulo = $params->titulo;
+		$titulo = $params->titulo;
     	$contenido = $params->contenido;
     	$region = $params->region;
     	$tags = $params->tags;
@@ -51,51 +51,32 @@ function borrarOferta($params, $conexion){
     	$password = $conexion->passwordtests;
     	$servername = $conexion->servernametests;
     	$db = $conexion->db;
-    	$id = $params->id;
-    	$sql = "DELETE FROM `ofertas` WHERE '$id' = 'id'";
-
+		$response = new stdClass();
+    	if(isset($params->id)){
+			$id = $params ->id;
+    	$sql = "UPDATE `ofertas` SET `enabled`= 0 WHERE `id` = '$id'";
     	$conn = new mysqli($servername, $usuario, $password,$db);
-    	$response = new stdClass();
-
       	if ($conn->connect_error) {
         	die("Connection failed: " . $conn->connect_error);
       	}
       	if ($conn->query($sql) === TRUE) {
-        	$response->result['borrar'] = 'OK';
-        	$response->msg['borrar'] = 'Oferta borrada Correctamente';
-        	$response->code['borrar'] = '200';
+        	$response->result['DELETE'] = 'OK';
+        	$response->msg['DELETE'] = 'Oferta borrada Correctamente';
+        	$response->code['DELETE'] = '200';
       	} else {
-          	$response->result['borrar'] = 'ERROR';
-          	$response->err['borrar'] = 'Error borrar la oferta';
-          	$response->code['borrar'] = $conn->errno;
+          	$response->result['DELETE'] = 'ERROR';
+          	$response->err['DELETE'] = 'Error borrar la oferta';
+          	$response->code['DELETE'] = $conn->errno;
         }
+			$response = json_encode($response);
         return $response;
-}
-
-function desactivarOferta($params, $conexion){
-	$usuario = $conexion->usuariotests;
-	$password = $conexion->passwordtests;
-	$servername = $conexion->servernametests;
-	$db = $conexion->db;
-	$id = $params->id;
-	$sql = "UPDATE `ofertas` SET `activa`= 0 WHERE `id` = '$id'";
-
-	$conn = new mysqli($servername, $usuario, $password,$db);
-	$response = new stdClass();
-
-	  if ($conn->connect_error) {
-	    	die("Connection failed: " . $conn->connect_error);
-	  }
-	  if ($conn->query($sql) === TRUE) {
-	    	$response->result['desactivar'] = 'OK';
-	    	$response->msg['desactivar'] = 'Oferta desactivada Correctamente';
-	    	$response->code['desactivar'] = '200';
-	  } else {
-	      	$response->result['desactivar'] = 'ERROR';
-	      	$response->err['desactivar'] = 'Error borrar la oferta';
-	      	$response->code['desactivar'] = $conn->errno;
-   		}
- 	return $response;
+	}else{
+			$response->result['DELETE'] = 'ERROR';
+          	$response->err['DELETE'] = 'Id de la oferta no recibido';
+          	$response->code['DELETE'] = '400';
+			$response = json_encode($response);
+		return $response;
+	}
 }
 // ----------------Modificar Ofertas *unfinished---------------------
 function modificarOferta($params, $conexion){
@@ -168,7 +149,7 @@ switch($_SERVER['REQUEST_METHOD'])
 case 'GET': $endpoint = TodasOfertas($conexiondata); echo $endpoint; break;
 case 'POST': $endpoint = subirOferta($params, $conexiondata); echo $endpoint;  break;
 case 'PUT': echo "Put funcionando"; break;
-case 'DELETE': echo "Put funcionando"; break;
+case 'DELETE': $endpoint = borrarOferta($params, $conexiondata); echo $endpoint; break;
 default: echo "Error 403 Forbidden";
 }
 // ------------------ Fin pedir todas las ofertas (Lado administrador)-----------------
