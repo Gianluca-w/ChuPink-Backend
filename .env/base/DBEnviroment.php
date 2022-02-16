@@ -1,5 +1,4 @@
 <?php
-// $bar = new conexiondata
 $conexiondata = new stdClass();
 $conexiondata->usuariotests = "root";
 $conexiondata->passwordtests = "";

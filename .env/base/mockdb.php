@@ -33,6 +33,7 @@ $sql = array(
         apellido VARCHAR(30) NOT NULL,
         telefono VARCHAR(50) NOT NULL,
         hora_turno  TIMESTAMP,
+        duracion INT(10) NOT NULL DEFAULT 60,
         horario_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         confirmado INT(3),
         codigo_confirm INT(4),

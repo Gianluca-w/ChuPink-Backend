@@ -52,7 +52,6 @@ url:
 ChuPinkAngular/ChuPink-Backend/ofertas/public/
 y para filtrar se tienen que mandar en el body un json asi:
 {
-         "pattern":"filtro"
+         "pattern":"Manicura"
 }
 
-Y PONGANSE IMAGENES EN GITHUB MANGA DE HIJOS DE PUTA

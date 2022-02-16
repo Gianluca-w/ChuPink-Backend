@@ -139,7 +139,8 @@ function TodasOfertas($conexion){
 			$response = json_encode($response);
 		return $response;
 	} else {
-		echo "0 Resultados";	
+		$response = json_encode($response);
+		return $response;		
 	}
 	$conn->close();
 }
@@ -150,7 +151,7 @@ case 'GET': $endpoint = TodasOfertas($conexiondata); echo $endpoint; break;
 case 'POST': $endpoint = subirOferta($params, $conexiondata); echo $endpoint;  break;
 case 'PUT': echo "Put funcionando"; break;
 case 'DELETE': $endpoint = borrarOferta($params, $conexiondata); echo $endpoint; break;
-default: echo "Error 403 Forbidden";
+default: echo "Error 400 Bad Request";
 }
 // ------------------ Fin pedir todas las ofertas (Lado administrador)-----------------
 ?>

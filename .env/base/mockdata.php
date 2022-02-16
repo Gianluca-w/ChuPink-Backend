@@ -35,12 +35,12 @@ $sql = array(
     // "INSERT INTO archivos (nombre, ruta, tipo, peso, added_by)
     // VALUES ('placeholder3','../assets/img/gif/placeholder3.gif','gif','1Kb','admin')",
 
-    "INSERT INTO turnos (nombre, apellido, telefono, hora_turno, confirmado, codigo_confirm, empleado_asignado, added_by)
-     VALUES ('Manuel','Belgrano','542944543286',2021-11-21,'1','33','1','admin')",
-    "INSERT INTO turnos (nombre, apellido, telefono, hora_turno, confirmado, codigo_confirm, empleado_asignado, added_by)
-     VALUES ('Manuela','Belgrano','542944543286',2021-12-11,'1','13','1','admin')",
-    "INSERT INTO turnos (nombre, apellido, telefono, hora_turno, confirmado, codigo_confirm, empleado_asignado, added_by)
-     VALUES ('Juana','DelArco','542945543216',2021-11-29,'1','13','2','admin')",
+    "INSERT INTO turnos (cliente, apellido, telefono, hora_turno, duracion, confirmado, codigo_confirm, empleado_asignado, added_by)
+     VALUES ('Manuel','Belgrano','542944543286',2021-11-21,'30','1','33','1','admin')",
+    "INSERT INTO turnos (cliente, apellido, telefono, hora_turno, confirmado, codigo_confirm, empleado_asignado, added_by)
+     VALUES ('Manuela','Belgrano','542944543286',2021-12-11,'60','1','13','1','admin')",
+    "INSERT INTO turnos (cliente, apellido, telefono, hora_turno, confirmado, codigo_confirm, empleado_asignado, added_by)
+     VALUES ('Juana','DelArco','542945543216',2021-11-29 14:30:00,'120','1','13','2','admin')",
      
 
     "INSERT INTO noticias (titulo, contenido, img, tags, added_by)
